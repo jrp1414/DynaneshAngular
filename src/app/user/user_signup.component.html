@@ -26,12 +26,81 @@
                 <input type="text" formControlName="LastName" class="form-control" id="LastName" placeholder="Enter Last Name">
             </div>
             <div class="col-sm-4">
+                <em *ngIf="registerForm.get('LastName')?.invalid && (registerForm.get('LastName')?.touched || 
+                                        mouseoverlogin) && registerForm.get('LastName')?.errors.required" style="color:red">Required</em>
+                <em *ngIf="registerForm.get('LastName')?.invalid && registerForm.get('LastName')?.errors.pattern" style="color:red">Last Name should start with a Alphabet</em>
+            </div>
+        </div>
+        <div formGroupName="EmailGroup">
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="pwd">Email:</label>
+                <div class="col-sm-6">
+                    <input type="text" formControlName="Email" class="form-control" placeholder="Enter Email">
+                </div>
+                <div class="col-sm-4">
+                    <em *ngIf="registerForm.controls.EmailGroup.controls.Email?.invalid && (registerForm.get('EmailGroup.Email')?.touched || 
+                                                        mouseoverlogin) && registerForm.get('EmailGroup.Email')?.errors.required"
+                        style="color:red">Required</em>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="pwd">Confirm Email:</label>
+                <div class="col-sm-6">
+                    <input type="text" formControlName="ConfirmEmail" class="form-control" placeholder="Confirm Email">
+                </div>
+                <div class="col-sm-4">
+                    <em *ngIf="registerForm.controls.EmailGroup.controls.ConfirmEmail?.invalid && (registerForm.get('EmailGroup.ConfirmEmail')?.touched || 
+                        mouseoverlogin) && registerForm.get('EmailGroup.ConfirmEmail')?.errors.required" style="color:red">Required</em>
+                    <em *ngIf="registerForm.controls.EmailGroup.errors && 
+                                    registerForm.get('EmailGroup')?.errors.match" style="color:red">Both Emails Not matching</em>
+                </div>
             </div>
         </div>
         <div class="form-group">
+            <label class="control-label col-sm-2" for="pwd">Phone:</label>
+            <div class="col-sm-6">
+                <input type="text" formControlName="Phone" class="form-control" placeholder="Enter Phone">
+            </div>
+            <div class="col-sm-4" *ngIf="registerForm.get('Phone').errors">
+                <em *ngIf="registerForm.get('Phone')?.invalid && (registerForm.get('Phone')?.touched || 
+                                                mouseoverlogin) && registerForm.get('Phone')?.errors.required" style="color:red">Required</em>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="pwd">Age:</label>
+            <div class="col-sm-6">
+                <input type="number" formControlName="Age" class="form-control">
+            </div>
+            <div class="col-sm-4" *ngIf="registerForm.get('Age').errors">
+                <em *ngIf="registerForm.get('Age')?.invalid && (registerForm.get('Age')?.touched || 
+                                                    mouseoverlogin) && registerForm.get('Age')?.errors.range" style="color:red">Age Must be greater than 18 and less than 60</em>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="pwd">Notification:</label>
+            <div class="col-sm-6">
+                <input type="radio" formControlName="Notification" value="email" (click)="CheckNotificationType('email')">                <span>Email</span>
+                <input type="radio" formControlName="Notification" value="phone" (click)="CheckNotificationType('phone')">                <span>Phone</span>
+            </div>
+            <div class="col-sm-4">
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="pwd">Send Catalog:</label>
+            <div class="col-sm-6">
+                <input type="checkbox" formControlName="SendCatalog"> <span>Send Catalog</span>
+            </div>
+            <div class="col-sm-4">
+
+            </div>
+        </div>
+
+        <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
                 <span (mouseenter)="mouseoverlogin=true" (mouseleave)="mouseoverlogin=false"><button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid">Submit</button></span>
-
+                <button type="button" class="btn btn-info" (click)="TestData()">Test Data</button>
                 <button type="button" class="btn btn-default">Cancel</button>
             </div>
         </div>

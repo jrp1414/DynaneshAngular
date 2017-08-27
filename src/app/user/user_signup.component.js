@@ -10,6 +10,28 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
+// function RangeValidator(c: AbstractControl):{[key:string]:boolean} | null | string {
+//     if (c.value === undefined || isNaN(c.value) || c.value < 18 || c.value > 60) {
+//         return { 'range': true };
+//     }
+//     return null;
+// }
+function RangeValidator(min, max) {
+    return function (c) {
+        if (c.value === undefined || isNaN(c.value) || c.value < min || c.value > max) {
+            return { 'range': true };
+        }
+        return null;
+    };
+}
+function EmailMatch(c) {
+    var email = c.get("Email");
+    var confirmEmail = c.get("ConfirmEmail");
+    if (email.value === confirmEmail.value) {
+        return null;
+    }
+    return { 'match': true };
+}
 var UserSignUpComponent = (function () {
     function UserSignUpComponent(fb) {
         this.fb = fb;
@@ -32,7 +54,22 @@ var UserSignUpComponent = (function () {
             // FirstName:[""],
             //FirstName:{value:"",disabled:false},
             FirstName: ["", [forms_1.Validators.required, forms_1.Validators.pattern("[a-zA-Z].*")]],
-            LastName: ""
+            LastName: ["", [forms_1.Validators.required, forms_1.Validators.pattern("[a-zA-Z].*")]],
+            EmailGroup: this.fb.group({
+                Email: ["", [forms_1.Validators.required]],
+                ConfirmEmail: ["", [forms_1.Validators.required]]
+            }, { validator: EmailMatch }),
+            Phone: [""],
+            // Age: ["", ((c: AbstractControl) => {
+            //     if (c.value=== undefined || isNaN(c.value) || c.value < 18 || c.value > 60 ) {
+            //         return {'range':true};
+            //     }
+            //     return null;
+            // })],
+            // Age:["",[RangeValidator]],
+            Age: ["", [RangeValidator(18, 60)]],
+            Notification: "email",
+            SendCatalog: true
         });
     };
     // Register(signUpForm:any):void{
@@ -40,6 +77,29 @@ var UserSignUpComponent = (function () {
     // }
     UserSignUpComponent.prototype.Register = function () {
         console.log(this.registerForm.value);
+    };
+    UserSignUpComponent.prototype.TestData = function () {
+        // this.registerForm.setValue({
+        //     FirstName:"Dnyanesh",
+        //     LastName:"Navale"
+        // });
+        // this.registerForm.setValue({
+        //     FirstName:"Dnyanesh"
+        //     // LastName:"Navale" -- This will not work, In SetValue you have to set all the values
+        // });
+        this.registerForm.patchValue({
+            FirstName: "Dnyanesh",
+        });
+    };
+    UserSignUpComponent.prototype.CheckNotificationType = function (notificationVia) {
+        var phone = this.registerForm.get("Phone");
+        if (notificationVia === "phone") {
+            phone.setValidators(forms_1.Validators.required);
+        }
+        else {
+            phone.clearValidators();
+        }
+        phone.updateValueAndValidity();
     };
     return UserSignUpComponent;
 }());
