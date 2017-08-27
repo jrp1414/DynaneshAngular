@@ -1,0 +1,127 @@
+<div class="container">
+    <h2>Log In</h2>
+    <form #loginForm="ngForm" (ngSubmit)="logIn(loginForm.value)" class="form-horizontal" novalidate>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="email">User Name:</label>
+            <div class="col-sm-6">
+                <input type="text" #UserNameVar="ngModel" (ngModel)="UserName" required class="form-control" id="UserName" minlength="3"
+                    pattern="[a-zA-Z].*" placeholder="Enter User Name" name="UserName">
+            </div>
+            <div class="col-sm-4">
+                <!-- <em *ngIf="loginForm.controls.UserName?.invalid && (loginForm.controls.UserName?.touched || mouseoverlogin) && loginForm.controls.UserName?.errors.required" style="color:red">Required</em>                
+                <em *ngIf="loginForm.controls.UserName?.invalid && loginForm.controls.UserName?.errors.pattern" style="color:red">User Name cannot start with Numerics</em> -->
+                <em *ngIf="UserNameVar?.invalid && (UserNameVar?.touched || mouseoverlogin) && UserNameVar?.errors.required" style="color:red">Required</em>
+                 <em *ngIf="UserNameVar?.invalid && UserNameVar?.errors.minlength" style="color:red">Length of User Name should be atleast 3</em> 
+                <em *ngIf="UserNameVar?.invalid && UserNameVar?.errors.pattern" style="color:red">User name should start with Alphabet</em>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="pwd">Password:</label>
+            <div class="col-sm-6">
+                <input type="password" (ngModel)="Password" required class="form-control" id="Password" placeholder="Enter Password" name="Password">
+            </div>
+            <div class="col-sm-4">
+                <em *ngIf="loginForm.controls.Password?.invalid && (loginForm.controls.Password?.touched || mouseoverlogin)" style="color:red">Required</em>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <span (mouseenter)="mouseoverlogin=true" (mouseleave)="mouseoverlogin=false"><button type="submit" [disabled]="loginForm.invalid"  class="btn btn-primary">Submit</button></span>
+
+                <button type="button" class="btn btn-default">Cancel</button>
+            </div>
+        </div>
+    </form>
+    <!-- 
+    <div class="row">
+        <div class="col-md-6">
+            <div class="well">
+                <div class="row">
+                    <div class="col-md-8">loginForm.valid</div>
+                    <div class="col-md-4">{{loginForm.valid}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">loginForm.invalid</div>
+                    <div class="col-md-4">{{loginForm.invalid}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">loginForm.dirty</div>
+                    <div class="col-md-4">{{loginForm.dirty}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">loginForm.pristine</div>
+                    <div class="col-md-4">{{loginForm.pristine}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">loginForm.touched</div>
+                    <div class="col-md-4">{{loginForm.touched}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">loginForm.untouched</div>
+                    <div class="col-md-4">{{loginForm.untouched}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">loginForm.submitted</div>
+                    <div class="col-md-4">{{loginForm.submitted}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="well">
+                <div class="row">
+                    <div class="col-md-8">loginForm.controls.UserName.valid</div>
+                    <div class="col-md-4">{{loginForm.controls.UserName?.valid}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">loginForm.controls.UserName.invalid</div>
+                    <div class="col-md-4">{{loginForm.controls.UserName?.invalid}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">loginForm.controls.UserName.dirty</div>
+                    <div class="col-md-4">{{loginForm.controls.UserName?.dirty}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">loginForm.controls.UserName.pristine</div>
+                    <div class="col-md-4">{{loginForm.controls.UserName?.pristine}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">loginForm.controls.UserName.touched</div>
+                    <div class="col-md-4">{{loginForm.controls.UserName?.touched}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">loginForm.controls.UserName.untouched</div>
+                    <div class="col-md-4">{{loginForm.controls.UserName?.untouched}}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="well">
+                <div class="row">
+                    <div class="col-md-8">loginForm.controls.Password.valid</div>
+                    <div class="col-md-4">{{loginForm.controls.Password?.valid}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">loginForm.controls.Password.invalid</div>
+                    <div class="col-md-4">{{loginForm.controls.Password?.invalid}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">loginForm.controls.Password.dirty</div>
+                    <div class="col-md-4">{{loginForm.controls.Password?.dirty}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">loginForm.controls.Password.pristine</div>
+                    <div class="col-md-4">{{loginForm.controls.Password?.pristine}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">loginForm.controls.Password.touched</div>
+                    <div class="col-md-4">{{loginForm.controls.Password?.touched}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">loginForm.controls.Password.untouched</div>
+                    <div class="col-md-4">{{loginForm.controls.Password?.untouched}}</div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+</div>

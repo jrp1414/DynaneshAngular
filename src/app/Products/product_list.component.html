@@ -1,0 +1,27 @@
+﻿<div class="panel">
+    <div class="panel-heading">{{pageTitle}}</div>
+    <div>
+        <button (click)="toggleImage()" class="btn btn-primary">{{showImage?"Hide":"Show" }} Images</button>
+    </div>
+    <div class="row">
+        <div class="col-md-2">Enter Filter Text</div>
+        <div class="col-md-2"><input type="text" class="form-control" [(ngModel)]="filterBy" /></div>
+        <div class="col-md-2" *ngIf="filterBy"><span class="alert alert-info">{{filterBy}}</span></div>
+        <!-- <div class="col-md-2" *ngIf="filterBy"><span class="alert alert-info">{{Message}}</span></div> -->
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-4" *ngFor="let product of products | productFilter:filterBy" >
+                <!-- <button (click)="thumbnail.SetMessage()" class="btn btn-primary">Log Something</button> -->
+                  <!-- <button (click)="thumbnail.SetProduct(product)" class="btn btn-primary">Set Product</button>  -->
+                  <ap-productThumbail #thumbnail [product]="product" [routerLink]="['/products',product.Id]"></ap-productThumbail>  
+                 <!-- <ap-productThumbail #thumbnail ></ap-productThumbail>  -->
+                <!-- <div [thumbnail.Message]="'SomeOtherText'"></div> -->
+            </div>
+
+        </div>
+    </div>
+    <!--  -->
+
+    <div class="alert alert-info" *ngIf="!products && !products.length">No Products Found</div>
+</div>

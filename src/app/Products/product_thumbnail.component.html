@@ -1,0 +1,48 @@
+
+
+<div class="well">
+    <div>{{Message}}</div>
+    <h2>{{product?.Name}}</h2>
+    <div class="row">
+        <div class="col-md-4">Product Code</div>
+        <div class="col-md-4">{{product?.ProductCode}}</div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">Price</div>
+        <div class="col-md-4">
+            <!-- <span [style.color]="product?.Price>4000?'red':black" [style.fontWeight]="product?.Price>4000?'bold':'normal'"></span> -->
+             <!-- <span [ngStyle]="product?.Price>4000?{color:'red',fontWeight:'bold'}:{}" >
+                {{product?.Price}}     
+            </span>
+            <span [ngStyle]="getPriceStyle()" >
+                {{product?.Price}}     
+            </span>-->
+              <!-- <span [class.red]="product?.Price>1000" [class.bold]="product?.Price>1000">{{product?.Price}}</span>  -->
+            <!-- <span [ngClass]="product?.Price>1000?'red bold':''" >{{product?.Price}}</span> -->
+            <!-- <span [ngClass]="product?.Price>1000?{red:'red',bold:'bold'}:{}" >{{product?.Price}}</span> -->
+            <!-- <span [ngClass]="product?.Price>1000?['red','bold']:[]" >{{product?.Price}}</span> -->
+            <span [ngClass]="getPriceClasses()" >{{product?.Price}}</span>
+            </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">Discount</div>
+        <div class="col-md-4">{{product?.Discount}}</div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">Offer</div>
+        <!-- <div class="col-md-4">
+            <div [ngSwitch]="product?.Details?.Category">
+                <span *ngSwitchCase="'Furniture'">You have additonal 5% Discount in Axis Bank Card</span>
+                <span *ngSwitchCase="'Computer'">You have additonal 10% Discount in Axis Bank Card</span>
+                <span *ngSwitchDefault>You have no additonal Discount in this Category</span>
+            </div>
+        </div> -->
+
+        <div [ngSwitch]="product?.Details?.Category" class="col-md-4">
+            <span *ngSwitchCase="'Furniture'">You have additonal 5% Discount in Axis Bank Card</span>
+            <span *ngSwitchCase="'Computer'">You have additonal 10% Discount in Axis Bank Card</span>
+            <span *ngSwitchDefault>You have no additonal Discount in this Category</span>
+        </div>
+    </div>
+
+</div>
