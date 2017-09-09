@@ -35,6 +35,10 @@ function EmailMatch(c) {
 var UserSignUpComponent = (function () {
     function UserSignUpComponent(fb) {
         this.fb = fb;
+        this.ErrorMessages = {
+            required: "Required",
+            pattern: "Invalid Pattern"
+        };
     }
     // fName= new FormControl({value:"Ram",disabled:false},[Validators.required,Validators.pattern("[a-zA-Z].*")]);
     // lName= new FormControl("Sharma");
@@ -49,6 +53,7 @@ var UserSignUpComponent = (function () {
         //     FirstName:this.fName,
         //     LastName:this.lName
         // });
+        var _this = this;
         this.registerForm = this.fb.group({
             // FirstName:"",
             // FirstName:[""],
@@ -69,8 +74,47 @@ var UserSignUpComponent = (function () {
             // Age:["",[RangeValidator]],
             Age: ["", [RangeValidator(18, 60)]],
             Notification: "email",
-            SendCatalog: true
+            SendCatalog: true,
+            Addresses: this.fb.array([
+                this.createAddressGroup()
+            ])
         });
+        // this.registerForm.get("Notification").valueChanges.subscribe(val=>console.log(val));
+        this.registerForm.get("Notification").valueChanges.subscribe(function (val) { return _this.CheckNotificationType(val); });
+        var firstNameControl = this.registerForm.get("FirstName");
+        var lastNameControl = this.registerForm.get("LastName");
+        firstNameControl.valueChanges.subscribe(function (val) { return _this.getFirstNameMessage(firstNameControl); });
+        lastNameControl.valueChanges.subscribe(function (val) { return _this.getLastNameMessage(lastNameControl); });
+    };
+    Object.defineProperty(UserSignUpComponent.prototype, "addresses", {
+        get: function () {
+            return this.registerForm.get("Addresses");
+            ;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    UserSignUpComponent.prototype.createAddressGroup = function () {
+        return this.fb.group({
+            AddLine1: "",
+            AddLine2: "",
+            City: ""
+        });
+    };
+    UserSignUpComponent.prototype.getFirstNameMessage = function (control) {
+        var _this = this;
+        this.FirstNameMessage = "";
+        if ((control.dirty || control.touched) && control.errors) {
+            this.FirstNameMessage = Object.keys(control.errors).map(function (key) { return _this.ErrorMessages[key]; }).join(" , ");
+        }
+    };
+    UserSignUpComponent.prototype.getLastNameMessage = function (control) {
+        var _this = this;
+        this.LastNameMessage = "";
+        if ((control.dirty || control.touched) && control.errors) {
+            console.log(control.errors);
+            this.LastNameMessage = Object.keys(control.errors).map(function (key) { return _this.ErrorMessages[key]; }).join(" , ");
+        }
     };
     // Register(signUpForm:any):void{
     //     console.log(signUpForm.value);
