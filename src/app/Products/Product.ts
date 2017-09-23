@@ -1,11 +1,12 @@
 ﻿export interface IProduct{
+    id:number;
     Name: string;
     ProductId: string;
     Price: number;
-    ImageUrl: string;
     Discount: number;
     Rating: number;
-    GetDiscountedPrice(Price: number, Discount: number): number;
+    Details:{};
+    //GetDiscountedPrice(Price: number, Discount: number): number;
 }
 
 //export interface IBook {
@@ -14,7 +15,7 @@
 
 
 export class Product{
-    Id:number;
+    id:number;
     Name: string;
     ProductCode: string;
     Price: number;

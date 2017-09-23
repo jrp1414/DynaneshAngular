@@ -14,8 +14,9 @@
             <div class="col-md-4" *ngFor="let product of products | productFilter:filterBy" >
                 <!-- <button (click)="thumbnail.SetMessage()" class="btn btn-primary">Log Something</button> -->
                   <!-- <button (click)="thumbnail.SetProduct(product)" class="btn btn-primary">Set Product</button>  -->
-                  <ap-productThumbail #thumbnail [product]="product" [routerLink]="['/products',product.Id]"></ap-productThumbail>  
+                  <!-- <ap-productThumbail #thumbnail [product]="product" [routerLink]="['/products',product.Id]"></ap-productThumbail>   -->
                  <!-- <ap-productThumbail #thumbnail ></ap-productThumbail>  -->
+                 <ap-productThumbail #thumbnail [product]="product"></ap-productThumbail>
                 <!-- <div [thumbnail.Message]="'SomeOtherText'"></div> -->
             </div>
 
@@ -23,5 +24,5 @@
     </div>
     <!--  -->
 
-    <div class="alert alert-info" *ngIf="!products && !products.length">No Products Found</div>
+    <!-- <div class="alert alert-info" *ngIf="!products && !products.length">No Products Found</div> -->
 </div>

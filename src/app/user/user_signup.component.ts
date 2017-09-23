@@ -70,11 +70,12 @@ export class UserSignUpComponent implements OnInit {
             Age: ["", [RangeValidator(18, 60)]],
             Notification: "email",
             SendCatalog: true,
-            Addresses:this.fb.array([
+
+            addresses:this.fb.array([
                 this.createAddressGroup()
             ])
         });       
-
+        console.log(this.registerForm.get('SendCatalog'));
         // this.registerForm.get("Notification").valueChanges.subscribe(val=>console.log(val));
         this.registerForm.get("Notification").valueChanges.subscribe(val => this.CheckNotificationType(val));
         const firstNameControl = this.registerForm.get("FirstName");
@@ -83,11 +84,15 @@ export class UserSignUpComponent implements OnInit {
         lastNameControl.valueChanges.subscribe(val=>this.getLastNameMessage(lastNameControl));
     }
 
-    get addresses(){
-        return <FormArray>this.registerForm.get("Addresses");;
+    get addresses() {        
+        return <FormArray>this.registerForm.get("addresses");
     }
-
-
+    AddAddress():void{
+        this.addresses.push(this.createAddressGroup());
+    }
+    RemoveAddress(i:number){
+        this.addresses.removeAt(i);
+    }
     createAddressGroup():FormGroup{
         return this.fb.group({
             AddLine1:"",
@@ -149,6 +154,6 @@ export class UserSignUpComponent implements OnInit {
             phone.clearValidators();
         }
         phone.updateValueAndValidity();
-    }
+    }   
 
 }

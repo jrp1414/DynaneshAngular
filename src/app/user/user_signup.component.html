@@ -93,12 +93,20 @@
             </div>
         </div>
         <div *ngIf="registerForm.get('SendCatalog').value">
-            <div class="row" formArrayName="addresses" *ngFor="let address of addresses" > 
-                <div class="well" formGroupName="0">
+            <div class="row">
+                <div class="col-md-3">
+                    <button class="btn btn-primary" (click)="AddAddress()">Add New Address</button>
+                </div>
+            </div>
+            <div class="row" formArrayName="addresses" *ngFor="let address of addresses.controls;let i=index">
+                <div class="well" [formGroupName]="i">
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="pwd">Address Line 1:</label>
                         <div class="col-sm-6">
                             <input type="text" formControlName="AddLine1" class="form-control" placeholder="Enter Address Line 1">
+                        </div>
+                        <div class="col-sm-2">
+                            <button (click)="RemoveAddress(i)"><span class="glyphicon glyphicon-remove"></span></button>
                         </div>
                     </div>
                     <div class="form-group">

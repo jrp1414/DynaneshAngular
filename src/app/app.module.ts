@@ -1,6 +1,8 @@
 import { RouterModule, Router } from "@angular/router"
 import { BrowserModule } from "@angular/platform-browser"
 import { FormsModule } from "@angular/forms"
+import { InMemoryWebApiModule } from "angular-in-memory-web-api";
+import { CollapsableWellComponent } from "./shared/index";
 import {
     NgModule,
     AppComponent,
@@ -18,10 +20,13 @@ import {
     ProductDetailsActivator
 } from "./Index"
 import { AuthService } from "./user/auth.service";
+import { ProductDB } from "./Products/ProductDB";
+import { HttpModule } from "@angular/http";
 
 
 @NgModule({
-    imports: [BrowserModule, FormsModule, RouterModule.forRoot(appRoutes)],
+    // imports: [BrowserModule, FormsModule,HttpModule, RouterModule.forRoot(appRoutes),InMemoryWebApiModule.forRoot(ProductDB)],
+    imports: [BrowserModule, FormsModule,HttpModule, RouterModule.forRoot(appRoutes)],
     declarations: [
         AppComponent,
         WelcomeComponent,
@@ -32,12 +37,14 @@ import { AuthService } from "./user/auth.service";
         ProductDetailsComponent,
         ProductThumbnailComponent,
         CreateProductComponent,
-        Error404Component
+        Error404Component,
+        CollapsableWellComponent
     ],
     providers: [
         ProductService,
         { provide: "CancelCreateProductActivator", useValue: CancelCreateProductActivator },
-        AuthService
+        AuthService,
+        ProductDetailsActivator        
     ],
     bootstrap: [AppComponent]
 })

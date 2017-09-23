@@ -8,8 +8,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var router_1 = require("@angular/router");
 var platform_browser_1 = require("@angular/platform-browser");
 var forms_1 = require("@angular/forms");
+var index_1 = require("./shared/index");
 var Index_1 = require("./Index");
 var auth_service_1 = require("./user/auth.service");
+var http_1 = require("@angular/http");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -17,7 +19,8 @@ var AppModule = (function () {
 }());
 AppModule = __decorate([
     Index_1.NgModule({
-        imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, router_1.RouterModule.forRoot(Index_1.appRoutes)],
+        // imports: [BrowserModule, FormsModule,HttpModule, RouterModule.forRoot(appRoutes),InMemoryWebApiModule.forRoot(ProductDB)],
+        imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, http_1.HttpModule, router_1.RouterModule.forRoot(Index_1.appRoutes)],
         declarations: [
             Index_1.AppComponent,
             Index_1.WelcomeComponent,
@@ -28,12 +31,14 @@ AppModule = __decorate([
             Index_1.ProductDetailsComponent,
             Index_1.ProductThumbnailComponent,
             Index_1.CreateProductComponent,
-            Index_1.Error404Component
+            Index_1.Error404Component,
+            index_1.CollapsableWellComponent
         ],
         providers: [
             Index_1.ProductService,
             { provide: "CancelCreateProductActivator", useValue: CancelCreateProductActivator },
-            auth_service_1.AuthService
+            auth_service_1.AuthService,
+            Index_1.ProductDetailsActivator
         ],
         bootstrap: [Index_1.AppComponent]
     })

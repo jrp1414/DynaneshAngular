@@ -75,10 +75,11 @@ var UserSignUpComponent = (function () {
             Age: ["", [RangeValidator(18, 60)]],
             Notification: "email",
             SendCatalog: true,
-            Addresses: this.fb.array([
+            addresses: this.fb.array([
                 this.createAddressGroup()
             ])
         });
+        console.log(this.registerForm.get('SendCatalog'));
         // this.registerForm.get("Notification").valueChanges.subscribe(val=>console.log(val));
         this.registerForm.get("Notification").valueChanges.subscribe(function (val) { return _this.CheckNotificationType(val); });
         var firstNameControl = this.registerForm.get("FirstName");
@@ -88,12 +89,17 @@ var UserSignUpComponent = (function () {
     };
     Object.defineProperty(UserSignUpComponent.prototype, "addresses", {
         get: function () {
-            return this.registerForm.get("Addresses");
-            ;
+            return this.registerForm.get("addresses");
         },
         enumerable: true,
         configurable: true
     });
+    UserSignUpComponent.prototype.AddAddress = function () {
+        this.addresses.push(this.createAddressGroup());
+    };
+    UserSignUpComponent.prototype.RemoveAddress = function (i) {
+        this.addresses.removeAt(i);
+    };
     UserSignUpComponent.prototype.createAddressGroup = function () {
         return this.fb.group({
             AddLine1: "",
