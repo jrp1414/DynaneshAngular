@@ -26,6 +26,11 @@
                 <span *ngSwitchDefault>You have no additonal Discount in this Category</span>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-2">
+                <a [routerLink]="['/products',product?.id]" class="btn btn-default">Details</a>
+            </div>
+        </div>
     </div>
     
 </collapsable-well>

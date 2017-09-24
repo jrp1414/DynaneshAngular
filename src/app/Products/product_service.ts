@@ -1,6 +1,6 @@
 import { Product, IProduct } from "./Product";
 import { Injectable,OnInit } from "@angular/core";
-import { Http,Response } from "@angular/http";
+import { Http,Response,Headers } from "@angular/http";
 import {Observable} from "rxjs/Observable";
 
 import "rxjs/add/operator/map";
@@ -21,17 +21,33 @@ export class ProductService{
         .map((response:Response)=><IProduct[]>response.json())
         .catch((error:Response)=>error.json());
     };
-    getProduct(id:number):Product{
+    getProduct(id:number):Observable<IProduct>{
         // return products.find((p:Product)=>p.Id === id);
-        return {
-            id:1,
-            Name:"Chair",
-            ProductCode:"GDC-001",
-            Price:252.25,
-            Discount:10.25,
-            Rating:5,
-            Message:"",
-            Details:{Category:"Furniture",Description:"Test",ImageUrl:"http://pngimg.com/uploads/chair/chair_PNG6900.png"}
-        };        
+        return this.http.get(this.baseUrl+"GetProduct/"+id)
+        .map((response:Response)=><IProduct>response.json())
+        .catch((error:Response)=>error.json());        
     }
+
+    saveProduct(product:IProduct):Observable<any>{
+        return this.http.post(this.baseUrl+"SaveProduct",product,{headers:new Headers({"Content-Type":"application/json"})})
+        .map((response:Response)=>console.log("Success"))
+        .catch((error:Response)=>{
+            console.log(error.json());
+            return error.json();
+        });        
+    }
+
+    // getProduct(id:number):Observable<IProduct>{
+    //     // return products.find((p:Product)=>p.Id === id);
+    //     return this.http.get(this.baseUrl+"GetProduct/"+id)
+    //     .map((response:Response)=><IProduct>response.json())
+    //     .catch((error:Response)=>error.json());        
+    // }
+
+    // getProduct(id:number):Observable<IProduct>{
+    //     // return products.find((p:Product)=>p.Id === id);
+    //     return this.http.get(this.baseUrl+"GetProduct/"+id)
+    //     .map((response:Response)=><IProduct>response.json())
+    //     .catch((error:Response)=>error.json());        
+    // }
 }

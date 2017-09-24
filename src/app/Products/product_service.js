@@ -28,16 +28,17 @@ var ProductService = (function () {
     ;
     ProductService.prototype.getProduct = function (id) {
         // return products.find((p:Product)=>p.Id === id);
-        return {
-            id: 1,
-            Name: "Chair",
-            ProductCode: "GDC-001",
-            Price: 252.25,
-            Discount: 10.25,
-            Rating: 5,
-            Message: "",
-            Details: { Category: "Furniture", Description: "Test", ImageUrl: "http://pngimg.com/uploads/chair/chair_PNG6900.png" }
-        };
+        return this.http.get(this.baseUrl + "GetProduct/" + id)
+            .map(function (response) { return response.json(); })
+            .catch(function (error) { return error.json(); });
+    };
+    ProductService.prototype.saveProduct = function (product) {
+        return this.http.post(this.baseUrl + "SaveProduct", product, { headers: new http_1.Headers({ "Content-Type": "application/json" }) })
+            .map(function (response) { return console.log("Success"); })
+            .catch(function (error) {
+            console.log(error.json());
+            return error.json();
+        });
     };
     return ProductService;
 }());

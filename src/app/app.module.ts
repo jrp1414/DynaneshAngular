@@ -1,6 +1,6 @@
 import { RouterModule, Router } from "@angular/router"
 import { BrowserModule } from "@angular/platform-browser"
-import { FormsModule } from "@angular/forms"
+import { FormsModule, ReactiveFormsModule } from "@angular/forms"
 import { InMemoryWebApiModule } from "angular-in-memory-web-api";
 import { CollapsableWellComponent } from "./shared/index";
 import {
@@ -26,7 +26,7 @@ import { HttpModule } from "@angular/http";
 
 @NgModule({
     // imports: [BrowserModule, FormsModule,HttpModule, RouterModule.forRoot(appRoutes),InMemoryWebApiModule.forRoot(ProductDB)],
-    imports: [BrowserModule, FormsModule,HttpModule, RouterModule.forRoot(appRoutes)],
+    imports: [BrowserModule, FormsModule,ReactiveFormsModule,HttpModule, RouterModule.forRoot(appRoutes)],
     declarations: [
         AppComponent,
         WelcomeComponent,

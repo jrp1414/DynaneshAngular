@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core"
 import { ActivatedRoute, Router } from "@angular/router"
 import { ProductService } from "./product_service";
-import { Product } from "./Product";
+import { Product, IProduct } from "./Product";
 
 @Component({
     selector: "ap-productDetails",
@@ -10,13 +10,15 @@ import { Product } from "./Product";
 })
 export class ProductDetailsComponent implements OnInit {
     ngOnInit(): void {
-        this.product = this.productService.getProduct(+this.route.snapshot.params["id"]);
+        //this.product = this.productService.getProduct(+this.route.snapshot.params["id"]);
+        this.productService.getProduct(+this.route.snapshot.params["id"])
+                            .subscribe(val=>this.product = val,error=>console.log(error));
     }
     constructor(private productService: ProductService, private route: ActivatedRoute,private router:Router) {
 
     }
 
-    product: Product;
+    product: IProduct;
     RedirectToProducts(): void {
         this.router.navigate(["/products"]);
     }

@@ -20,7 +20,7 @@ var AppModule = (function () {
 AppModule = __decorate([
     Index_1.NgModule({
         // imports: [BrowserModule, FormsModule,HttpModule, RouterModule.forRoot(appRoutes),InMemoryWebApiModule.forRoot(ProductDB)],
-        imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, http_1.HttpModule, router_1.RouterModule.forRoot(Index_1.appRoutes)],
+        imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, forms_1.ReactiveFormsModule, http_1.HttpModule, router_1.RouterModule.forRoot(Index_1.appRoutes)],
         declarations: [
             Index_1.AppComponent,
             Index_1.WelcomeComponent,

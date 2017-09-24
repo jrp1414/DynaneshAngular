@@ -10,7 +10,7 @@ import { ProductDetailsActivator } from "./Products/ProductDetailsActivator";
 export const appRoutes:Routes = [
     {path:"products/new",component:CreateProductComponent,canDeactivate:["CancelCreateProductActivator"]},
     {path:"products",component:ProductListComponent},
-    {path:"products/:id",component:ProductDetailsComponent,canActivate:[ProductDetailsActivator]},
+    {path:"products/:id",component:ProductDetailsComponent}, //,canActivate:[ProductDetailsActivator]
     {path:"404",component:Error404Component},
     {path:"",redirectTo:"/products",pathMatch:"full"},
     {path:"user",loadChildren:"app/user/user.module#UserModule"}

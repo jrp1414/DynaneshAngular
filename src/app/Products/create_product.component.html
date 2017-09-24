@@ -1,8 +1,65 @@
-<div class="jumbotron">
-    <div class="alert alert-info">The Add Product Form will go here.</div>
-
-    <div class="row">
-        <div class="col-md-2"><button type="submit" class="btn btn-primary">Submit</button></div>
-        <div class="col-md-2"><button type="button" class="btn btn-default" (click)="Cancel()">Cancel</button></div>
-    </div>
+<div class="container">
+    <h2>Add Product</h2>
+    <form [formGroup]="createForm" (ngSubmit)="SaveProduct()" class="form-horizontal" novalidate>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="email">Name:</label>
+            <div class="col-sm-6">
+                <input type="text" formControlName="Name" required class="form-control" placeholder="Enter Product Name">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="pwd">Product Code:</label>
+            <div class="col-sm-6">
+                <input type="text" formControlName="ProductId" class="form-control" placeholder="Enter Product Code">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="pwd">Price:</label>
+            <div class="col-sm-6">
+                <input type="number" formControlName="Price" class="form-control" placeholder="Enter Price">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="pwd">Discount:</label>
+            <div class="col-sm-6">
+                <input type="number" formControlName="Discount" class="form-control" placeholder="Enter Discount">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="pwd">Rating:</label>
+            <div class="col-sm-6">
+                <input type="number" formControlName="Rating" class="form-control" placeholder="Enter Rating">
+            </div>
+        </div>
+        <div formGroupName="Details">
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="pwd">Category:</label>
+                <div class="col-sm-6">
+                    <input type="text" formControlName="Category" class="form-control" placeholder="Enter Category">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="pwd">Description:</label>
+                <div class="col-sm-6">
+                    <input type="text" formControlName="Description" class="form-control" placeholder="Enter Description">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="pwd">ImageUrl:</label>
+                <div class="col-sm-6">
+                    <input type="text" formControlName="ImageUrl" class="form-control" placeholder="Enter Image Url">
+                </div>
+                <div class="col-sm-6">
+                    <img *ngIf="createForm.get('Details.ImageUrl').value" [src]="createForm.get('Details.ImageUrl').value" class="img img-rounded" [alt]="createForm.get('Name').value" width="304" height="236" />
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-primary" [disabled]="createForm.invalid">Save</button>
+                <button type="button" class="btn btn-default" (click)="Cancel()" >Cancel</button>
+            </div>
+        </div>
+    </form>
 </div>

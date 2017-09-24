@@ -18,7 +18,10 @@ var ProductDetailsComponent = (function () {
         this.router = router;
     }
     ProductDetailsComponent.prototype.ngOnInit = function () {
-        this.product = this.productService.getProduct(+this.route.snapshot.params["id"]);
+        var _this = this;
+        //this.product = this.productService.getProduct(+this.route.snapshot.params["id"]);
+        this.productService.getProduct(+this.route.snapshot.params["id"])
+            .subscribe(function (val) { return _this.product = val; }, function (error) { return console.log(error); });
     };
     ProductDetailsComponent.prototype.RedirectToProducts = function () {
         this.router.navigate(["/products"]);

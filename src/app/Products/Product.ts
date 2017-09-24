@@ -5,7 +5,7 @@
     Price: number;
     Discount: number;
     Rating: number;
-    Details:{};
+    Details:ProductDetail;
     //GetDiscountedPrice(Price: number, Discount: number): number;
 }
 
