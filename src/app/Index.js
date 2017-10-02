@@ -15,4 +15,6 @@ __export(require("./Products/product_thumbnail.component"));
 __export(require("./Products/create_product.component"));
 __export(require("./Products/ProductDetailsActivator"));
 __export(require("./Shared/Index"));
+__export(require("./Products/edit_product.component"));
+__export(require("./Products/highlight.directive"));
 //# sourceMappingURL=Index.js.map

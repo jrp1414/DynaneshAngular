@@ -29,4 +29,11 @@
         <div class="col-md-2">Product Description</div>
         <div class="col-md-2">{{product.Detail.Description}}</div>
     </div> -->
+
+    <div class="row">
+        <div class="col-md-2">
+            <a [routerLink]="['/editproduct',product?.id]" class="btn btn-default">Edit</a>
+        </div>
+    </div>
+
 </div>

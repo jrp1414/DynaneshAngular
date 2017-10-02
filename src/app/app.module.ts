@@ -17,7 +17,9 @@ import {
     ProductThumbnailComponent,
     CreateProductComponent,
     Error404Component,
-    ProductDetailsActivator
+    ProductDetailsActivator,
+    EditProductComponent,
+    HighlightDirective
 } from "./Index"
 import { AuthService } from "./user/auth.service";
 import { ProductDB } from "./Products/ProductDB";
@@ -38,7 +40,9 @@ import { HttpModule } from "@angular/http";
         ProductThumbnailComponent,
         CreateProductComponent,
         Error404Component,
-        CollapsableWellComponent
+        CollapsableWellComponent,
+        EditProductComponent,
+        HighlightDirective
     ],
     providers: [
         ProductService,

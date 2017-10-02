@@ -37,6 +37,24 @@ export class ProductService{
         });        
     }
 
+    updateProduct(product:IProduct):Observable<any>{
+        return this.http.put(this.baseUrl+"UpdateProduct/"+product.id,product,{headers:new Headers({"Content-Type":"application/json"})})
+        .map((response:Response)=>console.log("Updated"))
+        .catch((error:Response)=>{
+            console.log(error.json());
+            return error.json();
+        });
+    }
+
+    deleteProduct(id:number):Observable<any>{
+        return this.http.delete(this.baseUrl+"DeleteProduct/"+id)
+        .map((response:Response)=>console.log("Deleted"))
+        .catch((error:Response)=>{
+            console.log(error.json());
+            return error.json();
+        });
+    }
+
     // getProduct(id:number):Observable<IProduct>{
     //     // return products.find((p:Product)=>p.Id === id);
     //     return this.http.get(this.baseUrl+"GetProduct/"+id)

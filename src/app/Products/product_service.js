@@ -40,6 +40,22 @@ var ProductService = (function () {
             return error.json();
         });
     };
+    ProductService.prototype.updateProduct = function (product) {
+        return this.http.put(this.baseUrl + "UpdateProduct/" + product.id, product, { headers: new http_1.Headers({ "Content-Type": "application/json" }) })
+            .map(function (response) { return console.log("Updated"); })
+            .catch(function (error) {
+            console.log(error.json());
+            return error.json();
+        });
+    };
+    ProductService.prototype.deleteProduct = function (id) {
+        return this.http.delete(this.baseUrl + "DeleteProduct/" + id)
+            .map(function (response) { return console.log("Deleted"); })
+            .catch(function (error) {
+            console.log(error.json());
+            return error.json();
+        });
+    };
     return ProductService;
 }());
 ProductService = __decorate([

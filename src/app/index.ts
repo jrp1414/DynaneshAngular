@@ -11,3 +11,5 @@ export * from "./Products/product_thumbnail.component";
 export * from "./Products/create_product.component";
 export * from "./Products/ProductDetailsActivator";
 export * from "./Shared/Index"
+export * from "./Products/edit_product.component";
+export * from "./Products/highlight.directive";

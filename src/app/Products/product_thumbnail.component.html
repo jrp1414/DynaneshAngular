@@ -1,7 +1,7 @@
 
 <collapsable-well>
     <div collapsableTitle>
-        <h2>{{product?.Name}} <i *ngIf="product?.Price > 1000" class="glyphicon glyphicon-fire" style="color:red"></i></h2>
+        <h2 myHighlight="yellow" fontColor="blue">{{product?.Name}} <i *ngIf="product?.Price > 1000" class="glyphicon glyphicon-fire" style="color:red"></i></h2>
     </div>
     <div collapsableBody>
         <div class="row">
@@ -28,7 +28,7 @@
         </div>
         <div class="row">
             <div class="col-md-2">
-                <a [routerLink]="['/products',product?.id]" class="btn btn-default">Details</a>
+                <a *ngIf="product" [routerLink]="['/editproduct',product.id]" class="btn btn-default">Edit</a>
             </div>
         </div>
     </div>

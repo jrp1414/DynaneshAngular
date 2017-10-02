@@ -9,16 +9,15 @@ import { Product, IProduct } from "./Product";
     templateUrl: "product_details.component.html"
 })
 export class ProductDetailsComponent implements OnInit {
+    product: IProduct;
     ngOnInit(): void {
         //this.product = this.productService.getProduct(+this.route.snapshot.params["id"]);
         this.productService.getProduct(+this.route.snapshot.params["id"])
-                            .subscribe(val=>this.product = val,error=>console.log(error));
+                            .subscribe(val=>{this.product = val},error=>console.log(error));
     }
-    constructor(private productService: ProductService, private route: ActivatedRoute,private router:Router) {
+    constructor(private productService: ProductService,private router:Router, private route: ActivatedRoute) {
 
-    }
-
-    product: IProduct;
+    }    
     RedirectToProducts(): void {
         this.router.navigate(["/products"]);
     }

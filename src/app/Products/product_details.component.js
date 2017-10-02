@@ -12,16 +12,16 @@ var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var product_service_1 = require("./product_service");
 var ProductDetailsComponent = (function () {
-    function ProductDetailsComponent(productService, route, router) {
+    function ProductDetailsComponent(productService, router, route) {
         this.productService = productService;
-        this.route = route;
         this.router = router;
+        this.route = route;
     }
     ProductDetailsComponent.prototype.ngOnInit = function () {
         var _this = this;
         //this.product = this.productService.getProduct(+this.route.snapshot.params["id"]);
         this.productService.getProduct(+this.route.snapshot.params["id"])
-            .subscribe(function (val) { return _this.product = val; }, function (error) { return console.log(error); });
+            .subscribe(function (val) { _this.product = val; }, function (error) { return console.log(error); });
     };
     ProductDetailsComponent.prototype.RedirectToProducts = function () {
         this.router.navigate(["/products"]);
@@ -34,7 +34,7 @@ ProductDetailsComponent = __decorate([
         moduleId: module.id,
         templateUrl: "product_details.component.html"
     }),
-    __metadata("design:paramtypes", [product_service_1.ProductService, router_1.ActivatedRoute, router_1.Router])
+    __metadata("design:paramtypes", [product_service_1.ProductService, router_1.Router, router_1.ActivatedRoute])
 ], ProductDetailsComponent);
 exports.ProductDetailsComponent = ProductDetailsComponent;
 //# sourceMappingURL=product_details.component.js.map
